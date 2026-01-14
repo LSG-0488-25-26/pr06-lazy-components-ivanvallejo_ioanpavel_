@@ -12,9 +12,11 @@ import com.example.pokemonapi.model.Pokemon
 fun PokemonListScreen(pokemons: List<Pokemon>, modifier: Modifier = Modifier) {
     Column(modifier = modifier) {
         Text(text = "Pokémon cargados: ${pokemons.size}")
-
-        pokemons.forEach { pokemon ->
-            Text(text = "Nombre: ${pokemon.name}")
+        LazyColumn() {
+            items(pokemons){ pokemon ->
+                PokeCard(pokemon = pokemon)
+            }
         }
+
     }
 }
