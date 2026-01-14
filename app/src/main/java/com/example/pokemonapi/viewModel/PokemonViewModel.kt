@@ -8,6 +8,10 @@ import com.example.pokemonapi.model.Pokemon
 class PokemonViewModel : ViewModel() {
 
     private val _pokemonList = MutableLiveData<List<Pokemon>>()
+
+    fun clearSelectedPokemon() {
+        _selectedPokemon.value = null
+    }
     val pokemonList: LiveData<List<Pokemon>> = _pokemonList
 
     private val _selectedPokemon = MutableLiveData<Pokemon>()

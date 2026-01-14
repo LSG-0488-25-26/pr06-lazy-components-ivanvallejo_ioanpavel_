@@ -11,8 +11,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import com.example.pokemonapi.ui.theme.PokemonApiTheme
-import com.example.pokemonapi.viewModel.PokemonViewModel
+import com.example.pokemonapi.view.PokemonDetailedView
 import com.example.pokemonapi.view.PokemonListScreen
+import com.example.pokemonapi.viewModel.PokemonViewModel
 
 class MainActivity : ComponentActivity() {
 
@@ -21,15 +22,29 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
         setContent {
             PokemonApiTheme {
                 val pokemons by pokemonViewModel.pokemonList.observeAsState(emptyList())
+                val selectedPokemon by pokemonViewModel.selectedPokemon.observeAsState()
 
                 Scaffold { innerPadding ->
-                    PokemonListScreen(
-                        pokemons = pokemons,
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                    if (selectedPokemon == null) {
+                        PokemonListScreen(
+                            pokemons = pokemons,
+                            modifier = Modifier.padding(innerPadding),
+                            onPokemonClick = { pokemon ->
+                                pokemonViewModel.selectPokemon(pokemon)
+                            }
+                        )
+                    } else {
+                        PokemonDetailedView(
+                            pokemon = selectedPokemon!!,
+                            onBack = {
+                                pokemonViewModel.clearSelectedPokemon()
+                            }
+                        )
+                    }
                 }
             }
         }

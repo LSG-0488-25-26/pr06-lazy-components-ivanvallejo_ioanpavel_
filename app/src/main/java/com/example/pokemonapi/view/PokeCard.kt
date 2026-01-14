@@ -1,6 +1,7 @@
 package com.example.pokemonapi.view
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -25,11 +26,12 @@ import com.example.pokemonapi.ui.theme.Blue
 import com.example.pokemonapi.ui.theme.Gray
 
 @Composable
-fun PokeCard(pokemon: Pokemon) {
+fun PokeCard(pokemon: Pokemon, onClick: () -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 16.dp, vertical = 8.dp)
+            .clickable { onClick() }
     ) {
         Row(
             modifier = Modifier.padding(16.dp),
@@ -68,9 +70,9 @@ fun PokeCard(pokemon: Pokemon) {
     }
 }
 
-@Preview(showBackground = true)
+/*@Preview(showBackground = true)
 @Composable
 fun PokecardPreview(){
     val pk = Pokemon(1, "Bulbasaur", "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png", "Grass/Poison", "A strange seed was planted on its back at birth.")
     PokeCard(pokemon = pk)
-}
+}*/

@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -20,7 +21,7 @@ import com.example.pokemonapi.model.Pokemon
 
 @Composable
 fun PokemonDetailedView(
-    pokemon: Pokemon
+    pokemon: Pokemon, onBack: () -> Unit
 ){
     Box(
         modifier = Modifier.fillMaxSize()
@@ -31,6 +32,12 @@ fun PokemonDetailedView(
         Column(
             modifier = Modifier.align(Alignment.Center),
         ) {
+            Button(
+                onClick = { onBack() },
+                modifier = Modifier.padding(bottom = 16.dp)
+            ) {
+                Text("Volver")
+            }
             //Name
             Text(text = pokemon.name,
                 fontWeight = FontWeight.Bold,
@@ -79,9 +86,9 @@ fun PokemonDetailedView(
     }
 }
 
-@Preview(showBackground = true)
+/*@Preview(showBackground = true)
 @Composable
 fun PokeDetailInfoPreview(){
     val pk = Pokemon(1, "Bulbasaur", "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png", "Grass/Poison", "A strange seed was planted on its back at birth.")
     PokemonDetailedView(pokemon = pk)
-}
+}*/
