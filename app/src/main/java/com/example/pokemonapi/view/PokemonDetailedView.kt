@@ -2,6 +2,7 @@ package com.example.pokemonapi.view
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -21,70 +22,58 @@ import com.example.pokemonapi.model.Pokemon
 
 @Composable
 fun PokemonDetailedView(
-    pokemon: Pokemon, onBack: () -> Unit
-){
+    pokemon: Pokemon,
+    onBack: () -> Unit
+) {
     Box(
-        modifier = Modifier.fillMaxSize()
-            .padding(8.dp),
-        contentAlignment = Alignment.Center,
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(8.dp)
+    ) {
 
-    ){
         Column(
             modifier = Modifier.align(Alignment.Center),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Button(
-                onClick = { onBack() },
-                modifier = Modifier.padding(bottom = 16.dp)
-            ) {
-                Text("Volver")
-            }
-            //Name
-            Text(text = pokemon.name,
+            // Name
+            Text(
+                text = pokemon.name,
                 fontWeight = FontWeight.Bold,
-                fontSize = 60.sp
+                fontSize = 40.sp
             )
-            //Img
+
+            // Image
             AsyncImage(
                 model = ImageRequest.Builder(LocalContext.current)
                     .data(pokemon.imageUrl)
                     .build(),
                 contentDescription = pokemon.name,
-                modifier = Modifier
-                    .size(250.dp)
-                    .padding(end = 8.dp),
-            )
-            //details
-            Text(
-                text = "ID\n",
-                fontWeight = FontWeight.Bold,
-                fontSize = 30.sp
-            )
-            Text(
-                text = "${pokemon.id}\n",
-                fontSize = 20.sp
-            )
-            Text(
-                text = "Type\n",
-                fontWeight = FontWeight.Bold,
-                fontSize = 30.sp
-            )
-            Text(
-                text ="${pokemon.type}\n",
-                fontSize = 20.sp
-            )
-            Text(
-                text = "Description\n",
-                fontWeight = FontWeight.Bold,
-                fontSize = 30.sp
-            )
-            Text(
-                text = pokemon.description,
-                fontSize = 20.sp
+                modifier = Modifier.size(250.dp)
             )
 
+            // Details
+            Text("ID", fontWeight = FontWeight.Bold, fontSize = 24.sp)
+            Text("${pokemon.id}", fontSize = 18.sp)
+
+
+            Text("Type", fontWeight = FontWeight.Bold, fontSize = 24.sp)
+            Text(pokemon.type, fontSize = 18.sp)
+
+            Text("Description", fontWeight = FontWeight.Bold, fontSize = 24.sp)
+            Text(pokemon.description, fontSize = 18.sp)
+        }
+
+        Button(
+            onClick = { onBack() },
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .padding(bottom = 24.dp)
+        ) {
+            Text("Volver")
         }
     }
 }
+
 
 /*@Preview(showBackground = true)
 @Composable
